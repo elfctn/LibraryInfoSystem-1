@@ -8,44 +8,54 @@ import java.util.List;
 
 public interface OgrenciRepository extends JpaRepository<Ogrenci, Long> {
 
-    // 1. Tüm öğrencileri getir
-    @Query(value = "SELECT * FROM ogrenci", nativeQuery = true)
+    //Öğrenci tablosundaki tüm kayıtları listeleyin.
+    String QUESTION_1 = "select * from ogrenci;";
+    @Query(value = QUESTION_1, nativeQuery = true)
     List<Ogrenci> findAll();
 
-    // 2. Kız öğrencileri getir
-    @Query(value = "SELECT * FROM ogrenci WHERE cinsiyet='K'", nativeQuery = true)
+    //Öğrenci tablosundaki kız öğrencileri listeleyin.
+    String QUESTION_2 = "select * from ogrenci where cinsiyet='K'";
+    @Query(value = QUESTION_2, nativeQuery = true)
     List<Ogrenci> findGirls();
 
-    // 3. Farklı sınıfları getir
-    @Query(value = "SELECT DISTINCT sinif FROM ogrenci", nativeQuery = true)
+    //Öğrenci tablosunda kaydı bulunan sınıfların adını her sınıf bir kez görüntülenecek şekilde listeleyiniz
+    String QUESTION_3 = "select distinct sinif from ogrenci";
+    @Query(value = QUESTION_3, nativeQuery = true)
     List<String> findAllClasses();
 
-    // 4. 10A sınıfındaki kız öğrenciler
-    @Query(value = "SELECT * FROM ogrenci WHERE cinsiyet='K' AND sinif='10A'", nativeQuery = true)
+    //Öğrenci tablosunda, 10A sınıfında olan kız öğrencileri listeleyiniz.
+    String QUESTION_4 = "select * from ogrenci where cinsiyet='K' and sinif='10A'";
+    @Query(value = QUESTION_4, nativeQuery = true)
     List<Ogrenci> find10AGirls();
 
-    // 5. No'su 5–10 arası olan kız öğrenciler
-    @Query(value = "SELECT * FROM ogrenci WHERE cinsiyet='K' AND ogrno > 5 AND ogrno < 10", nativeQuery = true)
+    //Öğrenci numarası 5 ile 10 arasında olan Kız öğrencileri listeleyiniz.
+    String QUESTION_5 = "select * from ogrenci where (ogrno > 5 and ogrno < 10) and cinsiyet='K'";
+    @Query(value = QUESTION_5, nativeQuery = true)
     List<Ogrenci> findGirlsWithOgrno();
 
-    // 6. Tüm öğrencileri isme göre alfabetik sırayla getir (TEST BUNU İSTİYOR!)
-    @Query(value = "SELECT * FROM ogrenci ORDER BY LOWER(ad) COLLATE \"tr_TR\" ASC", nativeQuery = true)
+    // Öğrencileri adına göre sıralayınız (alfabetik)
+    String QUESTION_6 = "select * from ogrenci Order by ad ASC";
+    @Query(value = QUESTION_6, nativeQuery = true)
     List<Ogrenci> findStudentsAlphabetically();
 
-
-    // 7. 10A öğrencilerini okul no'ya göre artan sırayla sırala
-    @Query(value = "SELECT * FROM ogrenci WHERE sinif='10A' ORDER BY ogrno ASC", nativeQuery = true)
+    // 10A sınıfındaki öğrencileri okul numarasına göre azalan olarak sıralayınız.
+    String QUESTION_7 = "select * from ogrenci where sinif='10A' Order By ogrno DESC";
+    @Query(value = QUESTION_7, nativeQuery = true)
     List<Ogrenci> find10AStudentsByOgrNo();
 
-    // 8. En genç öğrenci
-    @Query(value = "SELECT * FROM ogrenci ORDER BY dtarih DESC LIMIT 1", nativeQuery = true)
+    //Öğrenciler tablosundaki en genç öğrenciyi listeleyiniz.
+    String QUESTION_8 = "select * from ogrenci Order by dtarih desc LIMIT 1";
+    @Query(value = QUESTION_8, nativeQuery = true)
     Ogrenci findYoungestStudent();
 
-    // 9. En yaşlı öğrenci
-    @Query(value = "SELECT * FROM ogrenci ORDER BY dtarih  ASC LIMIT 1", nativeQuery = true)
+    //Öğrenciler tablosundaki en yaşlı öğrenciyi listeleyiniz.
+    String QUESTION_9 = "select * from ogrenci Order by dtarih asc LIMIT 1";
+    @Query(value = QUESTION_9, nativeQuery = true)
     Ogrenci findElderStudent();
 
-    // 10. İsminin ikinci harfi 'E' olan öğrenciler
-    @Query(value = "SELECT * FROM ogrenci WHERE ad ILIKE '_E%'", nativeQuery = true)
+    //İkinci harfi E olan ogrencileri listeleyiniz.
+    String QUESTION_10 = "select * from ogrenci where ad ILIKE '_e%'";
+    @Query(value = QUESTION_10, nativeQuery = true)
     List<Ogrenci> findStudentsSecondLetterOfN();
+
 }
