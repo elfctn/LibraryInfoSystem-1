@@ -62,3 +62,11 @@ Aşağıda istenilen sonuçlara ulaşabilmek için gerekli SQL sorgularını yaz
 	10) İkinci harfi E olan ogrencileri listeleyiniz.
 
 
+DQL (Data Query Language)
+Veritabanından veri sorgulamak için kullanılır.
+Örnek komut:
+
+SELECT (Veri sorgulama)
+
+
+
